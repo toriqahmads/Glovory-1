@@ -16,6 +16,7 @@ export class AddressEntity1650179923051 implements MigrationInterface {
             type: 'varchar',
             isPrimary: true,
             generationStrategy: 'uuid',
+            default: 'uuid_generate_v4()'
           },
           {
             name: 'user_id',

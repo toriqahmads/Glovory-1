@@ -1,4 +1,6 @@
 import { TypeOrmModuleOptions } from '@nestjs/typeorm';
+import { config } from 'dotenv';
+config({ path: `${__dirname}/../../.env` });
 
 export const typeOrmModuleOptions: TypeOrmModuleOptions = {
   type: 'postgres',
@@ -7,19 +9,20 @@ export const typeOrmModuleOptions: TypeOrmModuleOptions = {
   username: process.env.POSTGRES_USER,
   password: process.env.POSTGRES_PASSWORD,
   database: process.env.POSTGRES_DB_PREFIX + '_' + process.env.POSTGRES_DB_NAME,
-  entities: [__dirname + '/../**/entities/*.entity.{ts,js}'],
+  entities: ['dist/**/*.entity.js'],
   /* Note : it is unsafe to use synchronize: true for schema synchronization
     on production once you get data in your database. */
   synchronize: false,
   autoLoadEntities: true,
+  migrationsRun: true
 };
 
 export const OrmConfig = {
   ...typeOrmModuleOptions,
   migrationsTableName: 'migrations',
-  migrations: ['src/migrations/*.ts'],
+  migrations: ['src/migrations/*{.ts,.js}'],
   cli: {
-    migrationsDir: 'src/migrations',
+    migrationsDir: 'src/migrations'
   },
 };
 

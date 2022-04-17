@@ -11,6 +11,7 @@ export class UserEntity1650179330776 implements MigrationInterface {
             type: 'varchar',
             isPrimary: true,
             generationStrategy: 'uuid',
+            default: 'uuid_generate_v4()'
           },
           {
             name: 'username',
